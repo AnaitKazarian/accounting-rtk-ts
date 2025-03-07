@@ -1,21 +1,20 @@
 import './App.css'
 import Guest from "./components/Guest";
 import Profile from "./components/Profile";
-import {Route, Routes, useLocation, useNavigate} from "react-router";
+import {Route, Routes, useNavigate} from "react-router";
 import {useEffect} from "react";
 
 function App() {
-  const token: string = 'test';
+  const token = 'test';
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
-    if (token.length === 0 && location.pathname !== '/') {
-      navigate('/', { replace: true });
-    } else if (token.length > 0 && location.pathname !== '/profile') {
-      navigate('/profile', { replace: true });
+    if (token) {
+      navigate('/profile');
+    } else {
+      navigate('');
     }
-  }, [token, location.pathname, navigate]);
+  }, [token, navigate]);
 
   return (
       <Routes>
