@@ -1,12 +1,14 @@
+import {useAppSelector} from "../../app/hooks.ts";
+
 const ProfileData = () => {
-    // TODO ProfileData component
+    const {firstName, lastName, login, roles} = useAppSelector(state => state.user);
     return (
         <>
-            <p>First name: ???</p>
-            <p>Last name: ???</p>
-            <p>Login: ???</p>
+            <p>First name: {firstName}</p>
+            <p>Last name: {lastName}</p>
+            <p>Login: {login}</p>
             <ul>
-                <li>???</li>
+                {roles.map(role => <li key={role}>{role}</li>)}
             </ul>
         </>
     );

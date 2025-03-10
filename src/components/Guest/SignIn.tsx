@@ -1,12 +1,15 @@
 import {useState} from "react";
+import {useAppDispatch} from "../../app/hooks.ts";
+import {fetchUser} from "../../features/api/accountApi.ts";
+import {createToken} from "../../utils/constants.ts";
 
 const SignIn = () => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useAppDispatch();
 
     const handleClickSignIn = () => {
-        // TODO handleClickSignIn
-        alert('Sign In')
+        dispatch(fetchUser(createToken(login, password)));
     }
 
     const handleClickClear = () => {
@@ -16,14 +19,13 @@ const SignIn = () => {
 
     return (
         <>
-          <label>Login:
-          <input
-          type={'text'}
-          onChange={e => setLogin(e.target.value)}
-          value={login}
-
-          />
-          </label>
+            <label>Login:
+                <input
+                    type={'text'}
+                    onChange={e => setLogin(e.target.value)}
+                    value={login}
+                />
+            </label>
             <label>Password:
                 <input
                     type={'password'}
