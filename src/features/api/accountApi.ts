@@ -69,8 +69,7 @@ export const updateUser = createAsyncThunk<UserProfile, UserData, {state: RootSt
 export const changePassword = createAsyncThunk<string, {oldPassword: string, newPassword: string}, { state: RootState }>(
     'user/password',
     async ({oldPassword, newPassword}, {getState}) => {
-        const state = getState();
-        const oldToken = createToken(state.user.login, oldPassword);
+        const oldToken = createToken(getState().user.login, oldPassword);
         const response = await fetch(`${base_url}/user/password`, {
             method: 'PUT',
             headers: {
